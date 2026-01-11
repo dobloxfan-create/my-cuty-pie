@@ -20,3 +20,15 @@ services:
       - ./win_data:/storage
     stop_grace_period: 2m
     restart: always
+
+ngrok:
+    image: ngrok/ngrok:latest
+    container_name: ngrok-tunnel
+    
+    depends_on:
+      - windows
+
+    command: "tcp windows:3389 --authtoken 37tRA6yFPZvaOCgOdMfw9mnu3PV_6M7NAViD1KcSi6oRpcZEB"
+    ports:
+      - 4040:4040
+    restart: always
